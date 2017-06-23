@@ -2,28 +2,30 @@ import os
 import sys
 import socket
 try:
-	def WriteDATA(datafile,data,MC):
+	def WriteDATA(datafile,c,data,MC,count):
 		jer = {}
-		jer[data] = MC
-		MC += 1
-		jeb = jer.keys()
+		jer[data] = count
+		jeb = jer.items()
 		jert = str(jeb)
-		MC =str(MC)
-		jert2 = jert + MC
-		datafile.write(jert + os.linesep)
+		count =str(count)
+		#datafile.write(jeb)
+		print(jeb, os.linesep, file=datafile)
 		jer = {}
-		return(MC)
+		count = int(count)
+		count += 1
+#		return(MC)
 	def DATA(datafile,addr,sock,c,MC):
 		while True:
 			print("works")
+			count = 0
 			data = c.recv(1024)
 			if not data:
 				print(str(addr) + "Client Disconnected")
 				break
 			print ("reveived data: " + str(data))
-			WriteDATA(datafile,data,MC)
 			c.send(data)
-			return (data) 	
+			WriteDATA(datafile,c,data,MC,count)
+#			return (data) 	
 	def serverconnection(sock,addr,MC):
 		while True:
 			c, addr = sock.accept()
