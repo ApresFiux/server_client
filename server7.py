@@ -2,19 +2,18 @@ import os
 import sys
 import socket
 try:
-	def WriteDATA(data,c,MC):
+	def WriteDATA(datafile,data,MC):
 		jer = {}
-		parameter = input("enter a parameter")
-		jer[data] = parameter
+		jer[data] = MC
 		MC += 1
-		c.send()
 		jeb = jer.keys()
 		jert = str(jeb)
 		MC =str(MC)
 		jert2 = jert + MC
 		datafile.write(jert + os.linesep)
 		jer = {}
-	def DATA(addr,sock,c,MC):
+		return(MC)
+	def DATA(datafile,addr,sock,c,MC):
 		while True:
 			print("works")
 			data = c.recv(1024)
@@ -22,7 +21,8 @@ try:
 				print(str(addr) + "Client Disconnected")
 				break
 			print ("reveived data: " + str(data))
-			WriteDATA(data,c,MC)
+			WriteDATA(datafile,data,MC)
+			c.send(data)
 			return (data) 	
 	def serverconnection(sock,addr,MC):
 		while True:
@@ -32,7 +32,14 @@ try:
 			count = str(countline)
 			datafile = open("data." + count, 'w')
 			print("Client Conneted from: " + str(addr))
-			DATA(addr,sock,c,MC)
+			DATA(datafile,addr,sock,c,MC)
+			count = int(count)
+			count = count + 1
+			count = str(count)
+			countfilewrite = open("count.art", 'w')
+			countfilewrite.write(count)
+			countfilewrite.close()
+			c.close()
 	def socketing(port, MC):
 		addr = '0.0.0.0'
 		sock = socket.socket()
