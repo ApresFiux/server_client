@@ -2,11 +2,18 @@ import os
 import sys
 import socket
 try:
-	def WriteDATA(data,MC):
-		jar = {}
+	def WriteDATA(data,c,MC):
+		jer = {}
 		parameter = input("enter a parameter")
-		jar[data] = parameter
-		MainCounter = (MainCounter + 1)
+		jer[data] = parameter
+		MC += 1
+		c.send()
+		jeb = jer.keys()
+		jert = str(jeb)
+		MC =str(MC)
+		jert2 = jert + MC
+		datafile.write(jert + os.linesep)
+		jer = {}
 	def DATA(addr,sock,c,MC):
 		while True:
 			print("works")
@@ -15,8 +22,7 @@ try:
 				print(str(addr) + "Client Disconnected")
 				break
 			print ("reveived data: " + str(data))
-			c.send()
-			WriteDATA(data,MC)
+			WriteDATA(data,c,MC)
 			return (data) 	
 	def serverconnection(sock,addr,MC):
 		while True:
@@ -38,13 +44,16 @@ try:
 	try:
 		while True :
 			MC = 0
-			port = input("Please enter port: ")
 			try:
-				port = int(port)
-				socketing(port, MC)
-				break
-			except ValueError:
-				print ("please enter numbers only")
+				port = input("Please enter port: ")
+				try:
+					port = int(port)
+					socketing(port, MC)
+					break
+				except ValueError:
+					print ("please enter numbers only")
+			except OSError:
+				print ("please use another port as this port is alread in use")
 	except KeyboardInterrupt:
 		print(" user-quit")
 except KeyboardInterrupt:
