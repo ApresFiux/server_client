@@ -16,7 +16,7 @@ try:
 			print("works")
 			data = c.recv(1024)
 			if not data:
-				print(str(addr) + socket.gethostbyaddr(str(addr)) + "Client Disconnected")
+				print(str(addr) + "Client Disconnected")
 				break
 			#if data == "get":                ##########
 			#	GetData()
@@ -44,7 +44,7 @@ try:
 			countline = countfile.readline()
 			count = str(countline)
 			datafile = open("data." + count, 'w')
-			print("Client Conneted from: " + socket.gethostbyaddr(str(addr)) + str(addr))
+			print("Client Conneted from: " + str(addr))
 			COUNT = 0
 			DATA(datafile,addr,sock,c,COUNT)
 			count = int(count)
