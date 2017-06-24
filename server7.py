@@ -2,30 +2,41 @@ import os
 import sys
 import socket
 try:
-	def WriteDATA(datafile,c,data,MC,count):
-		jer = {}
-		jer[data] = count
-		jeb = jer.items()
-		jert = str(jeb)
-		count =str(count)
-		#datafile.write(jeb)
-		print(jeb, os.linesep, file=datafile)
-		jer = {}
-		count = int(count)
-		count += 1
-#		return(MC)
-	def DATA(datafile,addr,sock,c,MC):
+	def GetData():
+		while True:
+			while data != 'exit':
+				c.send("get mode")
+				readfile = open(datafile, 'r')
+				lines = readfile.readlines()
+				victor = c.recv(1024)
+					
+				c.send(
+	def DATA(datafile,addr,sock,c,MC,COUNT):
 		while True:
 			print("works")
-			count = 0
 			data = c.recv(1024)
 			if not data:
 				print(str(addr) + "Client Disconnected")
 				break
+			if data == "get":                ##########
+				GetData()
+							########
 			print ("reveived data: " + str(data))
 			c.send(data)
-			WriteDATA(datafile,c,data,MC,count)
+			#WriteDATA(datafile,c,data,MC,COUNT)
 #			return (data) 	
+			jer = {}
+			jer[data] = COUNT
+			print(jer)
+			jeb = jer.items()
+			jert = str(jeb)
+			COUNT =str(COUNT)
+			#datafile.write(jeb)
+			print(jeb, os.linesep, file=datafile)
+			jer = {}
+			COUNT = int(COUNT)
+			COUNT = (COUNT + 1)
+			#return(COUNT)
 	def serverconnection(sock,addr,MC):
 		while True:
 			c, addr = sock.accept()
@@ -34,7 +45,8 @@ try:
 			count = str(countline)
 			datafile = open("data." + count, 'w')
 			print("Client Conneted from: " + str(addr))
-			DATA(datafile,addr,sock,c,MC)
+			COUNT = 0
+			DATA(datafile,addr,sock,c,MC,COUNT)
 			count = int(count)
 			count = count + 1
 			count = str(count)
