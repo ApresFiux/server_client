@@ -1,24 +1,25 @@
 import os
 import socket
 try:
-	def GetData():
+#	def GetData():
 	
-		print(sock.recv(1024))
-		message = raw_input("<-- ")
-		sock.send
+#		print(sock.recv(1024))
+#		message = raw_input("<-- ")
+#		sock.send
 	def Client(port):
 		host = '192.168.100.50'
 		sock = socket.socket()
 		sock.connect((host, port))
+		#message = raw_input("<-- ")
 		print ('Connected to ,"host",')
 		message = raw_input("-> ")
 		while message != "quit":
 			sock.send(message)
-			#data = sock.recv(1024)
-			#print ("Recived from server: ") + str(data)
+			data = sock.recv(1024)
+			print ("Recived from server: ") + str(data)
 			message = raw_input("-> ")
-			if message == "get":       ##########
-				GetData()				
+		#	if message == "get":       ##########
+		#		GetData()				
 						########
 		sock.close()
 	try:
@@ -33,8 +34,8 @@ try:
                 	                except ValueError:
                         	                print ("please enter numbers only")
 	                        except OSError:
-        	                        print ("please use another port as this port is alread in use")
-	        except KeyboardInterrupt:
+        	                        print ("binding server on this port not found")
+		except KeyboardInterrupt:
         	        print(" user-quit")
 	except socket.error:
 		print(" Wrong port - RTO")
