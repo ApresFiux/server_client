@@ -2,24 +2,33 @@ import os
 import sys
 import socket
 try:
-#	def GetData():
-#		while True:
-#			while data != 'exit':
-#				c.send("get mode")
-#				readfile = open(datafile, 'r')
-#				lines = readfile.readlines()
-#				victor = c.recv(1024)
+	def GetData(c,count):
+		while True:
+			while data != 'exit':
+				#c.send("get mode")
+				data = c.recv(1024)
+				readfile = open("data." + count, 'r')
+				lines = readfile.readlines()
+				lines = dict(lines)
+				ans = lines[data]
+				print(ans)
+				print(lines)
+				print(lines[data])
+				c.send(ans)
+				victor = c.recv(1024)
 #					
 #				c.send()
-	def DATA(datafile,addr,sock,c,COUNT):
+	def DATA(datafile,addr,sock,c,COUNT,count):
 		while True:
 			print("works")
 			data = c.recv(1024)
 			if not data:
 				print(str(addr) + "Client Disconnected")
 				break
-			#if data == "get":                ##########
-			#	GetData()
+			print (data)
+			if data == "b'get'":                ##########
+				print("Get Mode")
+				GetData(c,count)
 							########
 			print ("reveived data: " + str(data))
 			c.send(data)
@@ -46,7 +55,7 @@ try:
 			datafile = open("data." + count, 'w')
 			print("Client Conneted from: " + str(addr))
 			COUNT = 0
-			DATA(datafile,addr,sock,c,COUNT)
+			DATA(datafile,addr,sock,c,COUNT,count)
 			count = int(count)
 			count = count + 1
 			count = str(count)

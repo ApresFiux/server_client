@@ -1,11 +1,13 @@
 import os
 import socket
 try:
-#	def GetData():
-	
-#		print(sock.recv(1024))
-#		message = raw_input("<-- ")
-#		sock.send
+	def GetData(sock):
+		while True:
+			#getdot = sock.recv(1024)
+			message = raw_input("<-- ")
+			sock.send(message)
+			vit = sock.recv(1024)
+			print(vit)
 	def Client(port):
 		host = '192.168.100.50'
 		sock = socket.socket()
@@ -14,12 +16,13 @@ try:
 		print ('Connected to ,"host",')
 		message = raw_input("-> ")
 		while message != "quit":
+			message = str.encode(message)
 			sock.send(message)
 			data = sock.recv(1024)
 			print ("Recived from server: ") + str(data)
 			message = raw_input("-> ")
-		#	if message == "get":       ##########
-		#		GetData()				
+			if message == "get":       ##########
+				GetData(sock)				
 						########
 		sock.close()
 	try:

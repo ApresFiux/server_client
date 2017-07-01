@@ -1,8 +1,0 @@
-dict_items([(b'yes!', 0)]) 
-
-dict_items([(b':', 1)]) 
-
-dict_items([(b'\x18\x18q', 2)]) 
-
-dict_items([(b'q', 3)]) 
-
