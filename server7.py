@@ -71,19 +71,16 @@ try:
 		print("binding on port: " +str(port))	
 		serverconnection(sock,addr)	
 
-	try:
-		while True :
+	while True :
+		try:
+			port = input("Please enter port: ")
 			try:
-				port = input("Please enter port: ")
-				try:
-					port = int(port)
-					socketing(port)
-					break
-				except ValueError:
-					print ("please enter numbers only")
-			except OSError:
-				print ("please use another port as this port is alread in use")
-	except KeyboardInterrupt:
-		print(" user-quit")
+				port = int(port)
+				socketing(port)
+				break
+			except ValueError:
+				print ("please enter numbers only")
+		except OSError:
+			print ("please use another port as this port is alread in use")
 except KeyboardInterrupt:
-	print(" user-quit")
+	print("\n user-quit")
